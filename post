@@ -1,0 +1,61 @@
+-- --------------------------------------------------------
+-- Servidor:                     127.0.0.1
+-- Versão do servidor:           5.6.25-log - MySQL Community Server (GPL)
+-- OS do Servidor:               Win32
+-- HeidiSQL Versão:              9.5.0.5196
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Copiando estrutura do banco de dados para portal
+CREATE DATABASE IF NOT EXISTS `portal` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `portal`;
+
+-- Copiando estrutura para tabela portal.post
+CREATE TABLE IF NOT EXISTS `post` (
+  `post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_codigo_usuario` int(11) NOT NULL,
+  `post_titulo` varchar(50) NOT NULL,
+  `post_cod_imagem` varchar(50) DEFAULT NULL,
+  `post_informacao` text NOT NULL,
+  `post_data` date NOT NULL,
+  PRIMARY KEY (`post_id`),
+  KEY `FkPost` (`post_codigo_usuario`),
+  CONSTRAINT `FkPost` FOREIGN KEY (`post_codigo_usuario`) REFERENCES `usuario` (`usuario_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela portal.post: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` (`post_id`, `post_codigo_usuario`, `post_titulo`, `post_cod_imagem`, `post_informacao`, `post_data`) VALUES
+	(1, 1, 'Aniversario de Curitiba', '123456789', 'O aniversário de Curitiba é comemorado em 29 de março, dia em que foi fundada no ano de 1693. Em 2018 a cidade, que é a capital do estado do Paraná, completa 325 anos. Na altura da sua fundação, seu nome era Vila de Nossa Senhora da Luz dos Pinhais. Foi assim até 1721', '2018-05-03'),
+	(2, 1, 'Sergio Moro', '1234567890', 'Sérgio Fernando Moro OMM (Maringá, 1 de agosto de 1972) é um magistrado, escritor e professor universitário brasileiro. É juiz federal da 13.ª Vara Criminal Federal de Curitiba e foi professor de direito processual penal na Universidade Federal do Paraná. Graduado em Direito pela Universidade Estadual de Maringá', '2018-05-03'),
+	(9, 1, 'Corrupção no Brasil', '', 'A corrupção no Brasil não é algo novo e talvez seja um dos maiores problemas que afeta o bem-estar da população. Há muito tempo se fala de desvios de verbas públicas, da corrupção de políticos, da lavagem de dinheiro, do pagamento de propinas, do abuso de poder.', '2018-05-04'),
+	(12, 6, 'Filmes mais Esperados para 2018', NULL, 'Bumblebee. - Rampage: Destruição Total - Vingadores Guerra  Infinita - Tomb Raider: A Origem', '2018-05-04');
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela portal.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `usuario_id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_nome` varchar(50) NOT NULL,
+  `usuario_email` varchar(50) NOT NULL,
+  `usuario_senha` varchar(50) NOT NULL,
+  `usuario_data` date NOT NULL,
+  PRIMARY KEY (`usuario_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela portal.usuario: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` (`usuario_id`, `usuario_nome`, `usuario_email`, `usuario_senha`, `usuario_data`) VALUES
+	(1, 'Alex Sandro de Moraes', 'teste@teste.com', '123456', '2018-05-03'),
+	(6, 'Ricardo Cunga', 'ricun@tecno.net', 'ric123', '2018-05-03'),
+	(7, 'Fernanda Lima', 'fer@yahoo.com', '123456', '2018-05-04');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

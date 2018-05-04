@@ -24,7 +24,8 @@ $_UP['extensoes'] = array('jpg');
 $extensao = strtolower(end(explode('.', $_FILES['imagem']['name'])));
 
 if (array_search($extensao, $_UP['extensoes']) === false) {     
-    print "<script>alert('Extensao permitida para imagem e jpg'); </script>;";
+    print "<script>alert('Extensao permitida para imagem e jpg'); </script>";
+    header("location:postMain.php");
     die();
 }    
     
